@@ -1,7 +1,5 @@
 package it.pasqualini.util;
 
-import java.text.DecimalFormat;
-
 public class Util {
 
     public static void wait(int duration){
@@ -19,7 +17,6 @@ public class Util {
     public static void println(Object o){
         System.out.println(o.toString());
     }
-
 
 
 }

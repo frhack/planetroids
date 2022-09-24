@@ -1,13 +1,21 @@
 package it.pasqualini.planetroid.audio;
 
 
-import it.pasqualini.util.ListenerAdapter;
+import static it.pasqualini.util.Util.println;
 
-import javax.sound.sampled.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static it.pasqualini.util.Util.println;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
+import javax.sound.sampled.LineUnavailableException;
+
+import it.pasqualini.util.ListenerAdapter;
 
 
 public class AudioClip {

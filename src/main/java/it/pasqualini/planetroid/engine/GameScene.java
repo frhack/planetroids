@@ -1,9 +1,14 @@
 package it.pasqualini.planetroid.engine;
 
-import it.pasqualini.planetroid.audio.AudioClip;
-import it.pasqualini.planetroid.entity.*;
-
 import java.util.ArrayList;
+
+import it.pasqualini.planetroid.audio.AudioClip;
+import it.pasqualini.planetroid.entity.Asteroid;
+import it.pasqualini.planetroid.entity.Laser;
+import it.pasqualini.planetroid.entity.Moon;
+import it.pasqualini.planetroid.entity.Particle;
+import it.pasqualini.planetroid.entity.Player;
+import it.pasqualini.util.GamePanel;
 
 public class GameScene {
 

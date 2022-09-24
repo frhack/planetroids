@@ -1,14 +1,14 @@
 package it.pasqualini.planetroid;
 
 
-import it.pasqualini.planetroid.engine.GameLoopBuilder;
-import it.pasqualini.planetroid.engine.GameLoop;
-import it.pasqualini.util.Util;
-
-import javax.sound.sampled.*;
 import java.io.IOException;
 
-import static java.lang.Thread.sleep;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import it.pasqualini.planetroid.engine.GameLoop;
+import it.pasqualini.planetroid.engine.GameLoopBuilder;
+import it.pasqualini.util.Util;
 
 public class main {
 

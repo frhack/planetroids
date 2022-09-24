@@ -1,14 +1,19 @@
 package it.pasqualini.planetroid.engine;
 
-import it.pasqualini.planetroid.entity.Asteroid;
-import it.pasqualini.planetroid.entity.Laser;
-import it.pasqualini.planetroid.entity.Particle;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.text.DecimalFormat;
 import java.util.List;
+
+import it.pasqualini.planetroid.entity.Asteroid;
+import it.pasqualini.planetroid.entity.Laser;
+import it.pasqualini.planetroid.entity.Particle;
+import it.pasqualini.util.GamePanel;
 
 public class GameGraphic {
 

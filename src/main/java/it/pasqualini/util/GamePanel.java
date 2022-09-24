@@ -1,12 +1,15 @@
-package it.pasqualini.planetroid.engine;
+package it.pasqualini.util;
 
-import it.pasqualini.planetroid.entity.Moon;
-import it.pasqualini.planetroid.entity.Player;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Random;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import it.pasqualini.planetroid.engine.GameGraphic;
+import it.pasqualini.planetroid.engine.KeyHandler;
 
 public class GamePanel extends JPanel{
 
@@ -62,33 +65,5 @@ public class GamePanel extends JPanel{
         f.setVisible(true);
     }
 
-
-    public static class Normal {
-        double average;
-
-        public double getAverage() {
-            return average;
-        }
-
-        public double getStandardDeviation() {
-            return standardDeviation;
-        }
-
-        float standardDeviation;
-
-
-        public Normal(float average, float standardDeviation) {
-            this.average = average;
-            this.standardDeviation = standardDeviation;
-        }
-
-
-        public double sample() {
-            double r = new Random().nextGaussian();
-            return r * standardDeviation + average;
-        }
-
-    }
-    
 
 }

@@ -1,9 +1,9 @@
 package it.pasqualini.planetroid.engine;
 
-import it.pasqualini.util.ListenerAdapter;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import it.pasqualini.util.ListenerAdapter;
 
 public class KeyHandler extends KeyAdapter {
 

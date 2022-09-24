@@ -1,25 +1,28 @@
 package it.pasqualini.planetroid.engine;
 
-import it.pasqualini.planetroid.audio.SoundTrackManager;
-import it.pasqualini.util.*;
-import it.pasqualini.planetroid.entity.*;
-import it.pasqualini.util.Vector2;
-
+import static it.pasqualini.util.Util.asInt;
+import static it.pasqualini.util.Util.println;
 
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-import it.pasqualini.util.EventListener;
 
-import static it.pasqualini.util.Util.asInt;
-import static it.pasqualini.util.Util.println;
+import it.pasqualini.planetroid.entity.Asteroid;
+import it.pasqualini.planetroid.entity.Entity;
+import it.pasqualini.planetroid.entity.Laser;
+import it.pasqualini.planetroid.entity.Particle;
+import it.pasqualini.planetroid.entity.Player;
+import it.pasqualini.util.EventListener;
+import it.pasqualini.util.GamePanel;
+import it.pasqualini.util.Normal;
+import it.pasqualini.util.Vector2;
 
 public class GameIntelligence {
 
     final Double ANGULAR_SPEED = 3d * Math.PI / 180; // velocita' di rotazione della navicella
 
-    final GamePanel.Normal ASTEROID_SIZE = new GamePanel.Normal(100, 40);
+    final Normal ASTEROID_SIZE = new Normal(100, 40);
     final Double ASTEROID_SPEED = 0.6d; // nmodulo velocita' asteoid
     final Double PLAYER_PARTICLE_SPEEDS = 5d; // nmodulo velocita' asteoid
 

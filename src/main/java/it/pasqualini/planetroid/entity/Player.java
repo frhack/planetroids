@@ -1,11 +1,11 @@
 package it.pasqualini.planetroid.entity;
 
-import it.pasqualini.planetroid.engine.GamePanel;
-import it.pasqualini.planetroid.engine.KeyHandler;
+import static it.pasqualini.util.Util.asInt;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Transparency;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -14,7 +14,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-import static it.pasqualini.util.Util.asInt;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+
+import it.pasqualini.planetroid.engine.KeyHandler;
+import it.pasqualini.util.GamePanel;
 
 public class Player extends Entity {
     KeyHandler keyHandlerMove;

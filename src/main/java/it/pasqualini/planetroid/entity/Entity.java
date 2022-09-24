@@ -1,9 +1,9 @@
 package it.pasqualini.planetroid.entity;
 
-import it.pasqualini.util.Vector2;
-
 import java.util.ArrayList;
 import java.util.function.Predicate;
+
+import it.pasqualini.util.Vector2;
 
 public abstract class Entity {
     private final Vector2 position = new Vector2(0d, 0d);

@@ -1,8 +1,7 @@
 package it.pasqualini.planetroid.audio;
 
-import com.sun.tools.javac.Main;
+import static it.pasqualini.util.Util.println;
 
-import javax.sound.sampled.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +15,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static it.pasqualini.util.Util.println;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import com.sun.tools.javac.Main;
 
 
 public class AudioClipBuilder {

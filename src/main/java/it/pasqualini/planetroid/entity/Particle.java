@@ -1,16 +1,20 @@
 package it.pasqualini.planetroid.entity;
 
-import it.pasqualini.planetroid.engine.GamePanel;
-import it.pasqualini.planetroid.engine.KeyHandler;
-import it.pasqualini.util.Vector2;
+import static it.pasqualini.util.Util.asInt;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Transparency;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
-import static it.pasqualini.util.Util.asInt;
+import javax.swing.JFrame;
+
+import it.pasqualini.planetroid.engine.KeyHandler;
+import it.pasqualini.util.GamePanel;
+import it.pasqualini.util.Vector2;
 
 
 public class Particle extends Entity {

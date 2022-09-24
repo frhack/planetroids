@@ -33,10 +33,10 @@ public class GameLoopBuilder {
 
 
         GameIntelligence gameIntelligence = new GameIntelligence(panel);
-        GameGraphic gameGraphycs = new GameGraphic(panel,gameIntelligence.gameScene);
+        GameGraphic gameGraphics = new GameGraphic(panel,gameIntelligence.gameScene);
         GamePhysic gamePhysic = new GamePhysic(panel);
         GameMusic gameMusic = new GameMusic(gameIntelligence.gameScene);
-        gameLoop = new GameLoop(gameIntelligence,gamePhysic,gameIntelligence.gameScene,gameGraphycs, gameMusic);
+        gameLoop = new GameLoop(gameIntelligence,gamePhysic,gameIntelligence.gameScene,gameGraphics, gameMusic);
         return gameLoop;
     }
 

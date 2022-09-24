@@ -3,6 +3,7 @@ package it.pasqualini.planetroid.engine;
 
 
 import it.pasqualini.planetroid.audio.*;
+import it.pasqualini.util.EventListener;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class GameMusic {
 
         initAudioClips();
         initSequence();
-        keyHandler.keyReleasedListenerAdapter.addEventListener(new SoundTrackManager.EventListener<KeyEvent>() {
+        keyHandler.keyReleasedListenerAdapter.addEventListener(new EventListener<KeyEvent>() {
             @Override
             public void consume(KeyEvent item) {
                 handleKeyEvent(item);

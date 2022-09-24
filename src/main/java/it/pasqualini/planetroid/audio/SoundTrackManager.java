@@ -90,8 +90,5 @@ public class SoundTrackManager {
         }
     }
 
-    public static interface EventListener<T> {
-        void consume(T item);
 
-    }
 }

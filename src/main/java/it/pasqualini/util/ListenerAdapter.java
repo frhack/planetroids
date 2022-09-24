@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListenerAdapter<T> {
-    private final List<SoundTrackManager.EventListener<T>> listeners = new ArrayList<>();
+    private final List<EventListener<T>> listeners = new ArrayList<>();
 
-    public void addEventListener(SoundTrackManager.EventListener<T> listener) {
+    public void addEventListener(EventListener<T> listener) {
         listeners.add(listener);
     }
 
-    public void removeEventListener(SoundTrackManager.EventListener<T> listener) {
+    public void removeEventListener(EventListener<T> listener) {
         listeners.remove(listener);
     }
 
@@ -20,3 +20,5 @@ public class ListenerAdapter<T> {
         listeners.forEach(listener -> listener.consume(item));
     }
 }
+
+

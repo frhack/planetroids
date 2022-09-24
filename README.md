@@ -1,7 +1,7 @@
-## Planetroid 
+## Planetroids 
 
 ### Istruzioni
-Il gioco planetroid e' fortemente ispirato al classico gioco Asteroid.
+Il gioco planetroids e' fortemente ispirato al classico gioco Asteroid.
 
 Si differenzia per la forma rotondeggiante degli asteroidi e per il fatto che quando 
 un asteroide e' colpito si divide come se fosse una sfera, quindi in due sfere di dimensioni casuali

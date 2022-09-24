@@ -7,9 +7,9 @@ import java.awt.event.KeyEvent;
 
 public class KeyHandler extends KeyAdapter {
 
-    public ListenerAdapter<KeyEvent> keyReleasedListenerAdapter = new ListenerAdapter<>();
-    public ListenerAdapter<KeyEvent> keyPressedListenerAdapter = new ListenerAdapter<>();
-    public boolean left, right, up, down, fullscreen, shooting, shift;
+    public final ListenerAdapter<KeyEvent> keyReleasedListenerAdapter = new ListenerAdapter<>();
+    public final ListenerAdapter<KeyEvent> keyPressedListenerAdapter = new ListenerAdapter<>();
+    private boolean left, right, up, down, fullscreen, shooting, shift;
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -36,7 +36,47 @@ public class KeyHandler extends KeyAdapter {
         }
     }
 
-    @Override
+    public void setShooting(boolean shooting) {
+		this.shooting = shooting;
+	}
+
+	public ListenerAdapter<KeyEvent> getKeyReleasedListenerAdapter() {
+		return keyReleasedListenerAdapter;
+	}
+
+	public ListenerAdapter<KeyEvent> getKeyPressedListenerAdapter() {
+		return keyPressedListenerAdapter;
+	}
+
+	public boolean isLeft() {
+		return left;
+	}
+
+	public boolean isRight() {
+		return right;
+	}
+
+	public boolean isUp() {
+		return up;
+	}
+
+	public boolean isDown() {
+		return down;
+	}
+
+	public boolean isFullscreen() {
+		return fullscreen;
+	}
+
+	public boolean isShooting() {
+		return shooting;
+	}
+
+	public boolean isShift() {
+		return shift;
+	}
+
+	@Override
     public void keyReleased(KeyEvent e) {
         super.keyPressed(e);
 

@@ -1,6 +1,7 @@
 package it.pasqualini.planetroid.engine;
 
 import it.pasqualini.planetroid.audio.SoundTrackManager;
+import it.pasqualini.util.*;
 import it.pasqualini.planetroid.entity.*;
 import it.pasqualini.util.Vector2;
 
@@ -9,7 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-
+import it.pasqualini.util.EventListener;
 
 import static it.pasqualini.util.Util.asInt;
 import static it.pasqualini.util.Util.println;
@@ -56,7 +57,7 @@ public class GameIntelligence {
 
 
         keyHandler = gamePanel.keyHandler;
-        keyHandler.keyReleasedListenerAdapter.addEventListener(new SoundTrackManager.EventListener<KeyEvent>() {
+        keyHandler.keyReleasedListenerAdapter.addEventListener(new EventListener<KeyEvent>() {
             @Override
             public void consume(KeyEvent item) {
                 handleKeyEvent(item);
@@ -76,8 +77,8 @@ public class GameIntelligence {
             }
         } else if (item.getKeyCode() == KeyEvent.VK_B || item.getKeyCode() == KeyEvent.VK_ESCAPE) {
             System.exit(0);
-        } else if (item.getKeyCode() == KeyEvent.VK_ENTER) {
-            gameScene.setLives(LIVES);
+        } else if (item.getKeyCode() == KeyEvent.VK_ENTER  && ! gameScene.isGaming()) {
+            initScene();
             start();
             //incrementLevel();
         } else if (item.getKeyCode() == KeyEvent.VK_P) {
@@ -128,9 +129,12 @@ public class GameIntelligence {
         gameScene.setPlayer(newPlayer); //FIXME
         gameScene.setLives(LIVES);
         gameScene.setGaming(false);
+        
+        gameScene.getAsteroids().clear();
+       
 
         int n = NUMBER_ASTEROIDS[gameScene.getLevel()];
-
+     
         gameScene.getAsteroids().addAll(placeAsteroids(n, newPlayer));
 
     }
@@ -166,13 +170,13 @@ public class GameIntelligence {
     private void enterLevel() {
         int n = NUMBER_ASTEROIDS[gameScene.getLevel()];
         gameScene.getAsteroids().clear();
-        new Thread(new Runnable() {
+        new Thread(new Runnable() { // FIXME gli update grafici possono sovrapporsi con la rimozione/aggiunta di asteroidi in background
             @Override
             public void run() {
                 gameScene.getAsteroids().addAll(placeAsteroids(n, gameScene.getPlayer()));
             }
         }).start();
-
+        start();
     }
 
     public void decremenentLevel() {
@@ -244,8 +248,8 @@ public class GameIntelligence {
 
     public void processInput() {
         if (!gameScene.isGaming()) return;
-        gameScene.setThrusting(keyHandler.up);
-        gameScene.setShooting(keyHandler.shooting);
+        gameScene.setThrusting(keyHandler.isUp());
+        gameScene.setShooting(keyHandler.isShooting());
     }
 
     public void update() {
@@ -284,6 +288,8 @@ public class GameIntelligence {
                     player.setY(0);
                     gameScene.setSpeedX(0);
                     gameScene.setSpeedY(0);
+                }else {
+                	gameScene.setGaming(false);
                 }
             }
         }
@@ -299,8 +305,8 @@ public class GameIntelligence {
             gameScene.getSoundsQueue().add(GameScene.Sounds.PLAYER_EXPLOSION);
 
             gameScene.setLives(gameScene.getLives() - 1);
-            if (gameScene.getLives() <= 0) {
-                //System.exit(1);
+            if (gameScene.getLives() == 0) {
+                //
             }
             gameScene.getPlayer().setExploding(true);
             addParticlesPlayer();
@@ -341,7 +347,7 @@ public class GameIntelligence {
         if (gameScene.isShooting() && !gameScene.getPlayer().isExploding()) {
             gameScene.addLasers(buildLaser());
             gameScene.getSoundsQueue().add(GameScene.Sounds.LASER_FIRE);
-            keyHandler.shooting = false;
+            keyHandler.setShooting(false);
             gameScene.setShooting(false);
         }
     }
@@ -408,9 +414,9 @@ public class GameIntelligence {
 
 
     private void handleRotate() {
-        if (keyHandler.right) {
+        if (keyHandler.isRight()) {
             getPlayer().angularSpeed = (float) -ANGULAR_SPEED;
-        } else if (keyHandler.left) {
+        } else if (keyHandler.isLeft()) {
             getPlayer().angularSpeed = (float) +ANGULAR_SPEED;
         } else {
             getPlayer().angularSpeed = 0f;

@@ -1,0 +1,22 @@
+package it.pasqualini.util;
+
+import it.pasqualini.planetroid.audio.SoundTrackManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListenerAdapter<T> {
+    private final List<SoundTrackManager.EventListener<T>> listeners = new ArrayList<>();
+
+    public void addEventListener(SoundTrackManager.EventListener<T> listener) {
+        listeners.add(listener);
+    }
+
+    public void removeEventListener(SoundTrackManager.EventListener<T> listener) {
+        listeners.remove(listener);
+    }
+
+    public void fire(T item) {
+        listeners.forEach(listener -> listener.consume(item));
+    }
+}

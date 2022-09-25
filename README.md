@@ -64,7 +64,7 @@ e inizializzare il game loop..
 
 #### Domain model
 
-![Alt text](./doc/DM_vect.drawio.svg)
+![Alt text](./doc/DM.svg)
 
 
 #### Game Loop

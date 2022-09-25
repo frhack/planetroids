@@ -50,7 +50,7 @@ public class GameLoop implements Runnable {
     public void update() {
         gameIntelligence.processInput();
         gameIntelligence.update();
-        gamePhysic.update(gameScene);
+        gamePhysic.update();
         gameGraphycs.update();
         gameMusic.update();
     }

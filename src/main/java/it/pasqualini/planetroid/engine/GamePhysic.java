@@ -18,7 +18,7 @@ public class GamePhysic {
 
     GamePanel gamePanel;
 
-    public void update(GameScene gameScene) {
+    public void update() {
         Player player = gameScene.getPlayer();
 
         player.incrementX(gameScene.getSpeedX());

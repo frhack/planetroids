@@ -63,7 +63,7 @@ Il gioco e' un classico gioco con aggiornamento in un loop con frequenza di 60 F
 Il loop e' gestito dalla clase GameLoop.
 
 
-``` {.java}
+```java
         GameIntelligence gameIntelligence = new GameIntelligence(panel);
         GameGraphycs gameGraphycs = new GameGraphycs(panel,gameIntelligence.gameScene);
         GamePhysic gamePhysic = new GamePhysic(panel);
@@ -179,7 +179,7 @@ La classe GameGraphic non fa altro che demandare alle Entity il disegno grafico:
 
 #### Game Loop
 
-``` {.java}
+```java
 @Override
 public void run() {
 final int NANOSECONDS_PER_SEC = 1000000000;

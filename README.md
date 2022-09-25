@@ -1,6 +1,6 @@
 ## Planetroids 
 
-![](planetroids_2.png)
+![](planetroids.png)
 
 
 ### Istruzioni

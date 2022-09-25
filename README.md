@@ -1,6 +1,6 @@
 ## Planetroids 
 
-![](planetroids.png)
+![](./doc/planetroids.png)
 
 
 ### Istruzioni
@@ -61,6 +61,11 @@ e inizializzare il game loop..
         GameMusic gameMusic = new GameMusic(gameIntelligence.gameScene);
         gameLoop = new GameLoop(gameIntelligence,gamePhysic,gameIntelligence.gameScene,gameGraphycs, gameMusic);
 ```
+
+#### Domain model
+
+![Alt text](./doc/DM_vect.drawio.svg)
+
 
 #### Game Loop
 

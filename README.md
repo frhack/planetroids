@@ -10,6 +10,16 @@ Si differenzia per la forma rotondeggiante degli asteroidi e per il fatto che qu
 un asteroide e' colpito si divide come se fosse una sfera, quindi in due sfere di dimensioni casuali
 ma la cui somma dei volumi e' pari al volume di partenza.
 
+Scopo del gioco e' ridurre tutti gli asteroidi di ogni missione in detriti e totalizzare il massimo punteggio
+Gli asteroidi compaiono con dimensione casuale con distribuzione normale.
+Il punteggio non conta gli asteroidi distrutti ma la corrispondente quantita' di massa proporzionale al volume, come se fossero delle sfere. 
+
+La difficolta' delle missioni aumenta missione dopo missione:
+- nella prima missione bisogna distruggere 3 asteriodi
+- ogni missione il numero di asteroidi aumenta di uno
+- ogni missione la velocita' degli asteroidi aumenta del 3%
+- ogni missione la dimensione degli asteroidi diminuisce del 5%
+- ogni missione la dimensione dei frammenti degli asteroidi (sotto la quale l'asteoride si polverizza in detriti) diminuisce del 2%
 
 Comandi:
 

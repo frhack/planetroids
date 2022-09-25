@@ -222,8 +222,6 @@ public class Player extends Entity {
         int rows = 8;
         int cols = 8;
         int s = buffImage.getWidth() / rows;
-        int xx, yy;
-        buffImage.getSubimage(1, 2, 3, 4);
         for (int x = 0; x < cols; x++) {
             for (int y = 0; y < rows; y++) {
                 particlesImages.add(buffImage.getSubimage(x * s, y * s, s, s));

@@ -178,7 +178,6 @@ public class Asteroid extends Entity {
         int s = buffImage.getWidth() / rows;
         int i = 0;
         int max = 50;
-        buffImage.getSubimage(1, 2, 3, 4);
         for (int x = 0; x < cols; x++) {
             for (int y = 0; y < rows; y++) {
                 particlesImages.add(buffImage.getSubimage(x * s, y * s, s, s));

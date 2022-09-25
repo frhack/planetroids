@@ -12,8 +12,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import it.pasqualini.planetroid.engine.GamePanel;
 import it.pasqualini.planetroid.engine.KeyHandler;
-import it.pasqualini.util.GamePanel;
 import it.pasqualini.util.Vector2;
 
 

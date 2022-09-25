@@ -1,7 +1,5 @@
 package it.pasqualini.planetroid.engine;
 
-import it.pasqualini.util.GamePanel;
-
 public class GameLoop implements Runnable {
 
     public GamePanel panel;

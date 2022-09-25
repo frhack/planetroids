@@ -18,8 +18,8 @@ La difficolta' delle missioni aumenta missione dopo missione:
 - nella prima missione bisogna distruggere 3 asteriodi
 - ogni missione il numero di asteroidi aumenta di uno
 - ogni missione la velocita' degli asteroidi aumenta del 3%
-- ogni missione la dimensione degli asteroidi diminuisce del 5%
-- ogni missione la dimensione dei frammenti degli asteroidi (sotto la quale l'asteoride si polverizza in detriti) diminuisce del 2%
+- ogni missione il raggio degli asteroidi diminuisce del 5%
+- ogni missione il raggio dei frammenti degli asteroidi (sotto la quale l'asteoride si polverizza in detriti) diminuisce del 2%
 
 Comandi:
 
@@ -61,8 +61,7 @@ tra di loro.
 
 Il gioco e' un classico gioco con aggiornamento in un loop con frequenza di 60 FPS.
 Il loop e' gestito dalla clase GameLoop.
-La classe GameBuilder ha il compito di costruire le quattro classi fondamentali con le loro interdipendenze 
-e inizializzare il game loop..
+
 
 ``` {.java}
         GameIntelligence gameIntelligence = new GameIntelligence(panel);
@@ -71,10 +70,61 @@ e inizializzare il game loop..
         GameMusic gameMusic = new GameMusic(gameIntelligence.gameScene);
         gameLoop = new GameLoop(gameIntelligence,gamePhysic,gameIntelligence.gameScene,gameGraphycs, gameMusic);
 ```
+#### Scelte implementative
+Vista la semplicita' del gioco e la maturita' del linguaggio si e' scelto di non utilizzare librerie esterne di nessun tipo.
+Allo stesso tempo si e' voluto ottenere un progetto che possa essere il punto di partenza per ulteriori sviluppi facilitando l'integrazioe di librerie esterne. 
+Questo e' stato ottenuto cercando il massimo disaccoppiamento tra le classi.
+In particolare:
 
-#### Domain model
+La classe GameScene e' una classe di pure strutture dati e rappresenta il mondo del gioco. 
+Contiene tutti le informazioni sullo stato del gioco: gli oggetti grafici da visualizzare, il pannello grafico e i suoni da emettere.
+La classe GameIntelligence e' responsabile di tutta la logica di gioco: creare la scena di gioco, creare il Player (la navicella), gli asteroid, di emettere i laser, di generare le esplosioni, i detriti,
+gestire il punteggio e il numero di vite.
+Della logica di gioco fanno parte anche tutte le costanti di base che decidono le dimensioni, le velocita' le acellerazioni e quindi si trovano sempre in GameIntelligence.
+Se si vuole creare un gioco com funzionamento diverso, e' sufficiente intervenire su questa classe.
 
-![Alt text](./doc/DM.svg)
+
+##### Package Entity
+
+La scelta implementativa e' stata quella di privileggiare la semplicita' del design: la navicella, gli asteroidi, i laser e i detriti sono tutte estensioni della classe astratta Entity.
+
+Entity offre alcuni attributi gia' definiti e una serie di accessors per gestire la posizione.
+Offre inoltre dei metodi per verificare la collisione e per calcolare la distanza da un'altra entity.
+Entity delega ad un istanza di Vector2  la getione posizione.
+
+L'aspetto peculiare di Entity e' la presenza di un metodo astratto obbligando l'implementazione da parte delle sottoclassi, si tratta del metodo *draw* attraverso il quale ogni entita'
+concreta ha la responsabilita' di disegnarsi.
+
+```java
+    public abstract void draw(Graphics2D graphics);
+```
+
+##### Package Engine
+In questo package (in un'ottica di componente) troviamo le classi che collaborano alla parte essenziale del funzionamento del gioco.
+
+La classe GameBuilder e' una Pure Fabrication (pattern GRASP) ha la responsabilita' di costruire le quattro classi fondamentali con le loro interdipendenze
+e inizializzare il game loop.
+
+GameLoop e' la classe che implementa il loop all'interno di un thread in modo da permettere eventuali ulteriori elaborazioni durante il loop (in questa implementazione non ci sono).
+Sono state testati e valutati vari tipi di implemetazioni di GameLoop anche perche' in alcuni casi si avevano problemi di latenza /flickering, movimento oa scatti.
+Alla fine si adottata la forma piu' semplice con l'accorgimento di aggiungere queste istruzioni nell' aggiornamento della grafica per una resa ottimale.
+
+```java
+        BufferStrategy strategy = this.gamePanel.frame.getBufferStrategy();
+        if (!strategy.contentsLost()) {
+           strategy.show();
+        }
+
+        Toolkit.getDefaultToolkit().sync();
+```
+
+La classe GamePanel e' un'estensione di JPanel che aggiunge la gestione per entrare/uscire dalla modalita' fullscreen e incorpora il KeyHandler per la gestione dell'input.
+
+Un'istanza di GamePanel, rappresentando lo stato grafico del gioco, e' attributo della classe GameScene, che e' accessibile alle quattro classi di update loop.
+La gestione  e' responsabilit' esclusiva di GameIntelligence, con l'eccezione di GameMusic per la gestione del volume (dei suoni e della muica).
+
+In questo package troviamo le 4 classi che partecipano, ciascuna per la propria responsabilit' all' avanzamento del gioco, ovvero implementano il metodo *update* che viene richiamato 
+con la frequenza di gioco (60 frame per secondo) nel game loop.
 
 
 #### Game Loop
@@ -110,7 +160,7 @@ final double DRAW_INTERVAL = NANOSECONDS_PER_SEC / TARGET_FPS;
     public void update() {
         gameIntelligence.processInput();
         gameIntelligence.update();
-        gamePhysic.update(gameScene);
+        gamePhysic.update();
         gameGraphycs.update();
         gameMusic.update();
     }
@@ -121,6 +171,91 @@ final double DRAW_INTERVAL = NANOSECONDS_PER_SEC / TARGET_FPS;
     }
 
 ```
+
+##### Package Audio
+
+
+Per quanto riguarda i suoni le api di Java sono risultate piuttosto di basso livello e quindi e' stato necessario sviluppare uno strato di API che permettesse di non contaminare il codice 
+del gioco con dettagli implementativi estranei alla sua propria logica.
+Si e' dunque creato un package separato audio.
+In questo package oltre alla gestione dei suoni e' stata abozzata una possibile gestione di colonne sonore.
+A partire da un lungo brano di colonna sonora nel quale ci sono dei sottospezzoni adatti a fare da commento sonoro alle diverse fasi del gioco, con le API create e' possibile estrarre delle sotto clip,
+A partire da queste poi si puo' costruire a piacimento una sequenza di clip a formare una sountrack che viene suonata durante il gioco, potenzialmente quindi si possono creare tante sountrack, 
+per esempio una per ogni livello del gioco.
+
+Il software e' gia' predisposto, e' sufficiente nella classe GameMusic aggiungere la costruzione di ulteriori SoundTrackSequence e attivare nel metodo update al cambio di livello.
+
+La colonna sonora attuale parte da un unico brano "Giorgio by Moroder" e ne estrae 6 clip (il brano si presta perche' e' strutturato come una colonna sonora), quindi vengono ricombinate intervallandole 
+con una clip di pausa creata con un loop della clip 6 ripetuta 5 volte. 
+
+La gestione del volume di suoni e musica e' sperimentale, in quanto la modifica semplice del settaggio del volume tramite le API di Java sembra produrre degli errori e quindi si e' reso necessario ricaricare le clip ad ogni variazione del volume, un aspetto da indagare.
+
+
+##### Package Util 
+Contiene classi e metodi statici di utilita' generale.
+L'interfaccia EventListner<T> e la classe ListnerAdapeter<T> implementano una semplice gestione generica degli eventi.
+
+La classe Normal e' una semplcie classe per la generazione di valori casuali secondo una distribuzione normale (per un effetto piu' naturale).
+
+Vector2 (vettore bidimensionale) e' una classe general purpose per gestire coppie di valori di tipo Double, utile sia per rappresentare la velocita' che la posizione.
+La classe Util contiene dei puri metodi statici di utilita': wait (per creare un attesa), println (accorciatoia per scrivere nella console) e asInt (per convertire da Double a *int* approssimando).
+
+##### Refactory
+Si e' volutamente tenuto un design semplice lasciando ampi spazi per l'aggiunta di funzionalita' e integrazioni, intervendo al momento necessario con un minimo refactoring.
+Per supportare la posssibilita' di cambiare a run time la logica di gioco va introdotta un'interfaccia estraendo i metodi essenziali da GameIntelligence.
+Tale interfaccia fungerebbe da tipo in ogni occorrenza attauale di GameIntelligence e quindi una factory a run time si occuperebbe di instanziare il tipo effettivo scegliendo tra le classi che implementano l'interfaccia.
+L'attuale GameIntelligenze diventerebbe una classe che implementa l'interfaccia estratta.
+
+```java
+
+interface GameIntelligenceInterface implements GameIntelligenceInterface {
+    ...
+}
+class GameIntelligencePlanetroids implements GameIntelligenceInterfac {
+    ...
+}
+class GameIntelligenceUfos implements GameIntelligenceInterfac {
+    ...
+}
+
+
+
+```
+Un'anomalia da sistemare e' che la gestione della velocita' del Player attualmente e' nella classe GameScene.
+L'implementazione corretta e' stata adottata nella classe Laser, va riportata la medesima implementazione: delegando in Player a un' istanza di Vector2.
+Gli accessors di convenienza nella classe GameScene rimarrebbero ma delegando all'istanza del Player:
+
+```java
+    //class GameScene
+
+    public void setSpeedX(double speedX) {
+        this.player.getSpeed().setX(speedX);
+    }
+
+    public double getSpeedY() {
+        return this.player.getSpeed().setY(speedX);
+    }
+
+```
+Per una maggiore data locality (sfruttare al meglio la cache del processore per massimizzare le performance), valutare di usare il tipo Float/float invece di Double. 
+
+
+
+#### Domain model
+
+![Alt text](./doc/DM.svg)
+
+
+#### Class Diagrams
+
+![](./doc/engine.png)
+
+![](./doc/entity.png)
+
+![](./doc/audio.png)
+
+
+
 
 
 

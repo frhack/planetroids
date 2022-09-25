@@ -17,8 +17,8 @@ import java.util.function.Predicate;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import it.pasqualini.planetroid.engine.GamePanel;
 import it.pasqualini.planetroid.engine.KeyHandler;
-import it.pasqualini.util.GamePanel;
 
 public class Player extends Entity {
     KeyHandler keyHandlerMove;

@@ -13,7 +13,6 @@ import java.util.List;
 import it.pasqualini.planetroid.entity.Asteroid;
 import it.pasqualini.planetroid.entity.Laser;
 import it.pasqualini.planetroid.entity.Particle;
-import it.pasqualini.util.GamePanel;
 
 public class GameGraphic {
 

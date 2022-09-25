@@ -4,7 +4,6 @@ import it.pasqualini.planetroid.entity.Asteroid;
 import it.pasqualini.planetroid.entity.Laser;
 import it.pasqualini.planetroid.entity.Particle;
 import it.pasqualini.planetroid.entity.Player;
-import it.pasqualini.util.GamePanel;
 import it.pasqualini.util.Vector2;
 
 public class GamePhysic {

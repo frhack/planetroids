@@ -1,4 +1,4 @@
-package it.pasqualini.util;
+package it.pasqualini.planetroid.engine;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,9 +7,6 @@ import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import it.pasqualini.planetroid.engine.GameGraphic;
-import it.pasqualini.planetroid.engine.KeyHandler;
 
 public class GamePanel extends JPanel{
 

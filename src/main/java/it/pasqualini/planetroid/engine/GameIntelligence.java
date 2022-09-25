@@ -14,7 +14,6 @@ import it.pasqualini.planetroid.entity.Laser;
 import it.pasqualini.planetroid.entity.Particle;
 import it.pasqualini.planetroid.entity.Player;
 import it.pasqualini.util.EventListener;
-import it.pasqualini.util.GamePanel;
 import it.pasqualini.util.Normal;
 import it.pasqualini.util.Vector2;
 

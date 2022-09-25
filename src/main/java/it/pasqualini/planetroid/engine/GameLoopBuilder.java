@@ -5,8 +5,6 @@ import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 
-import it.pasqualini.util.GamePanel;
-
 public class GameLoopBuilder {
 
 

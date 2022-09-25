@@ -42,7 +42,7 @@ public class Particle extends Entity {
     public Particle(GamePanel panel) {
         this.keyHandlerMove = keyHandlerMove;
         this.gamePanel = panel;
-        JFrame f = panel.f;
+        JFrame f = panel.frame;
     }
 
     public Particle(GamePanel panel, int x, int y, Vector2 speed) {
@@ -126,6 +126,8 @@ public class Particle extends Entity {
     }
 
 
+
+    @Override
     public void draw(Graphics2D graphics) {
 
         //transform(graphics);

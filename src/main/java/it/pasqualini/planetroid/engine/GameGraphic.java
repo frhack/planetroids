@@ -29,7 +29,7 @@ public class GameGraphic {
 
         this.gamePanel = panel;
         this.gameScene = gameScene;
-        gamePanel.gameGraphycs = this;
+        gamePanel.gameGraphics = this;
     }
 
     public void update() {
@@ -64,7 +64,7 @@ public class GameGraphic {
         }
         gameScene.getPlayer().draw(graphics2D);
 
-        BufferStrategy strategy = this.gamePanel.f.getBufferStrategy();
+        BufferStrategy strategy = this.gamePanel.frame.getBufferStrategy();
         if (!strategy.contentsLost()) {
             strategy.show();
         }

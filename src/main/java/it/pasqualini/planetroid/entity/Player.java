@@ -96,7 +96,7 @@ public class Player extends Entity {
         this.setRadius(20);
         this.keyHandlerMove = keyHandlerMove;
         this.gamePanel = panel;
-        JFrame f = panel.f;
+        JFrame f = panel.frame;
         try {
             buffImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/playerShip3_red_centered_mod.png")));
             buffImage = resize(buffImage, 2 * getRadius());
@@ -183,10 +183,11 @@ public class Player extends Entity {
         op.filter(from, to);
     }
 
+    @Override
     public void draw(Graphics2D graphics) {
         if(exploding) return;
         graphics.setColor(Color.black);
-        JFrame f = gamePanel.f;
+        JFrame f = gamePanel.frame;
         //transform(graphics);
 
         // reset the view

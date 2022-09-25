@@ -1,5 +1,6 @@
 package it.pasqualini.planetroid.entity;
 
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -10,7 +11,7 @@ public abstract class Entity {
 
     private int radius = 0;
 
-
+    public abstract void draw(Graphics2D graphics);
 
     public double getX() {
         return position.getX();
@@ -78,4 +79,6 @@ public abstract class Entity {
     public Vector2 getPosition() {
         return position;
     }
+    
+    
 }

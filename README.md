@@ -1,5 +1,8 @@
 ## Planetroids 
 
+![](planetroids_2.png)
+
+
 ### Istruzioni
 Il gioco planetroids e' fortemente ispirato al classico gioco Asteroid.
 

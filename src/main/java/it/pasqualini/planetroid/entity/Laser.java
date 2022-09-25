@@ -63,7 +63,7 @@ private Double angle;
         this.setX(x);
         this.setY(y);
         this.speed = speed;
-        JFrame f = panel.f;
+        JFrame f = panel.frame;
         try {
             image = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/laserGreen11.png")));
             image = resize(image, 2 * radius);
@@ -154,6 +154,7 @@ private Double angle;
     }
 
 
+    @Override
     public void draw(Graphics2D graphics) {
 
         //transform(graphics);

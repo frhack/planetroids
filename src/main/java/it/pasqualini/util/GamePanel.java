@@ -14,9 +14,9 @@ import it.pasqualini.planetroid.engine.KeyHandler;
 public class GamePanel extends JPanel{
 
 	
-    public GameGraphic gameGraphycs;
+    public GameGraphic gameGraphics;
     public KeyHandler keyHandler = new KeyHandler();
-    public JFrame f = null;
+    public JFrame frame = null;
 
     public GamePanel(JFrame frame) {
         int width = (int) (frame.getToolkit().getScreenSize().width * 0.8);
@@ -27,7 +27,7 @@ public class GamePanel extends JPanel{
         setFocusable(true);
         addKeyListener(keyHandler);
         setBackground(Color.black);
-        f = frame;
+        this.frame = frame;
         //thread = new Thread(this);
         //moons.add(new Moon(this));
     }
@@ -38,8 +38,8 @@ public class GamePanel extends JPanel{
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
 
-        if (gameGraphycs != null)
-            gameGraphycs.draw(graphics2D);
+        if (gameGraphics != null)
+            gameGraphics.draw(graphics2D);
         //this.clear(graphics);
         //moons.get(0).draw(graphics2D);
         //player.draw(graphics2D);
@@ -50,19 +50,19 @@ public class GamePanel extends JPanel{
     
 
     public void enterFullScreen() {
-        f.dispose();
-        f.setUndecorated(true);
-        f.setBounds(0, 0, f.getToolkit().getScreenSize().width, f.getToolkit().getScreenSize().height);
-        f.setVisible(true);
+        frame.dispose();
+        frame.setUndecorated(true);
+        frame.setBounds(0, 0, frame.getToolkit().getScreenSize().width, frame.getToolkit().getScreenSize().height);
+        frame.setVisible(true);
     }
 
     public void exitFullScreen() {
-        int width = (int) (f.getToolkit().getScreenSize().width * 0.8);
-        int height = (int) (f.getToolkit().getScreenSize().height * 0.8);
-        f.dispose();
-        f.setUndecorated(false);
-        f.setBounds(0, 0, width, height);
-        f.setVisible(true);
+        int width = (int) (frame.getToolkit().getScreenSize().width * 0.8);
+        int height = (int) (frame.getToolkit().getScreenSize().height * 0.8);
+        frame.dispose();
+        frame.setUndecorated(false);
+        frame.setBounds(0, 0, width, height);
+        frame.setVisible(true);
     }
 
 

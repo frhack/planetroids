@@ -36,7 +36,7 @@ public class Moon extends Entity {
     public Moon(GamePanel panel) {
         this.keyHandlerMove = keyHandlerMove;
         this.panel = panel;
-        JFrame f = panel.f;
+        JFrame f = panel.frame;
         try {
             moon = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/asteroid.png")));
             moon = resize(moon, 2*radius);
@@ -74,6 +74,7 @@ public class Moon extends Entity {
     }
 
 
+    @Override
     protected void clear(Graphics2D g) {
         final int w = this.panel.getWidth();
         final int h = this.panel.getHeight();
@@ -107,7 +108,7 @@ public class Moon extends Entity {
     }
 
     public void draw(Graphics2D graphics) {
-        JFrame f = panel.f;
+        JFrame f = panel.frame;
 transform(graphics);
         graphics.setColor(Color.black);
         // reset the view

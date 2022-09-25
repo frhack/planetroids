@@ -8,8 +8,12 @@ import it.pasqualini.util.GamePanel;
 import it.pasqualini.util.Vector2;
 
 public class GamePhysic {
-    public GamePhysic(GamePanel panel) {
-        this.gamePanel = panel;
+	
+	private GameScene gameScene;
+	
+	
+    public GamePhysic(GameScene gameScene) {
+        this.gameScene = gameScene;
     }
 
     GamePanel gamePanel;

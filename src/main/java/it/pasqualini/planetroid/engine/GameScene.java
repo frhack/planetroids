@@ -152,7 +152,7 @@ public class GameScene {
     public GameScene(GamePanel panel) {
         this.setPanel(panel);
         //player = new Player(panel, new KeyHandler()); //FIXME
-        moon = new Moon(panel); //FIXME
+        //moon = new Moon(panel); //FIXME
         asteroids = new ArrayList<>();
     }
 

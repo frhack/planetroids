@@ -51,7 +51,7 @@ public class Asteroid extends Entity {
     public Asteroid(GamePanel panel) {
         this.keyHandlerMove = keyHandlerMove;
         this.gamePanel = panel;
-        JFrame f = panel.f;
+        JFrame f = panel.frame;
         try {
             buffImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/asteroid.png")));
             buffImage = resize(buffImage, 2 * getRadius());
@@ -68,7 +68,7 @@ public class Asteroid extends Entity {
         this.setX(x);
         this.setY( y);
         this.speed = speed;
-        JFrame f = panel.f;
+        JFrame f = panel.frame;
         try {
             buffImage = ImageIO.read(Objects.requireNonNull(getClass().getResource("/images/asteroid.png")));
             buffImage = resize(buffImage, 2* radius);

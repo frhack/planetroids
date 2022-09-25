@@ -369,7 +369,6 @@ public class GameIntelligence {
         List<Laser> lasers = getLasers();
         for (int i = lasers.size() - 1; i >= 0; i--) {
             if (lasers.get(i).hit || isOutOfPanel(lasers.get(i))) {
-                println("removing " + lasers.get(i).toString());
                 lasers.remove(i);
             }
         }

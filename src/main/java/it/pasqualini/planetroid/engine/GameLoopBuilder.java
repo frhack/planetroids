@@ -33,12 +33,12 @@ public class GameLoopBuilder {
         win.dispose();
         //win.setUndecorated(true);
         win.setVisible(true);
-        panel.f = win;
+        panel.frame = win;
 
 
         GameIntelligence gameIntelligence = new GameIntelligence(panel);
         GameGraphic gameGraphics = new GameGraphic(panel,gameIntelligence.gameScene);
-        GamePhysic gamePhysic = new GamePhysic(panel);
+        GamePhysic gamePhysic = new GamePhysic(gameIntelligence.gameScene);
         GameMusic gameMusic = new GameMusic(gameIntelligence.gameScene);
         gameLoop = new GameLoop(gameIntelligence,gamePhysic,gameIntelligence.gameScene,gameGraphics, gameMusic);
         return gameLoop;

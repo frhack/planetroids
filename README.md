@@ -288,8 +288,8 @@ Gli accessors di convenienza nella classe GameScene rimarrebbero, ma delegando a
         this.player.getSpeed().setX(speedX);
     }
 
-    public double getSpeedY() {
-        return this.player.getSpeed().setY(speedX);
+    public double getSpeedX() {
+        return this.player.getSpeed().getX();
     }
 
 ```

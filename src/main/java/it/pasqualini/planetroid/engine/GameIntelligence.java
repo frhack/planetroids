@@ -19,7 +19,7 @@ import it.pasqualini.util.Vector2;
 
 public class GameIntelligence {
 
-    final Double ANGULAR_SPEED = 1.2d * Math.PI / 180; // velocita' di rotazione della navicella
+    final Double ANGULAR_SPEED = 2.5d * Math.PI / 180; // velocita' di rotazione della navicella
 
     final Normal ASTEROID_SIZE = new Normal(100, 40);
     final Double ASTEROID_SPEED = 0.6d; // nmodulo velocita' asteoid
@@ -31,7 +31,7 @@ public class GameIntelligence {
     final int LASER_RADIUS = 10;
 
     final int LIVES = 3;
-    final int THRUST = 3;
+    final int THRUST = 5;
     final double FRICTION = 0.5;
 
     final Double LASER_SPEED = 10d;

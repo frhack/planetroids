@@ -13,14 +13,20 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
 import java.util.Iterator;
 
-public  class Frame extends JFrame {
-    /** The serial version id */
+public class Frame extends JFrame {
+    /**
+     * The serial version id
+     */
     private static final long serialVersionUID = 7659608187025022915L;
 
-    /** The conversion factor from nano to base */
+    /**
+     * The conversion factor from nano to base
+     */
     public static final double NANO_TO_BASE = 1.0e9;
 
-    /** The canvas to draw to */
+    /**
+     * The canvas to draw to
+     */
     protected final Canvas canvas;
 
     /** The dynamics engine */
@@ -28,13 +34,19 @@ public  class Frame extends JFrame {
 
     // stop/pause
 
-    /** True if the simulation is exited */
+    /**
+     * True if the simulation is exited
+     */
     private boolean stopped;
 
-    /** The time stamp for the last iteration */
+    /**
+     * The time stamp for the last iteration
+     */
     private long last;
 
-    /** Tracking for the step number when in manual stepping mode */
+    /**
+     * Tracking for the step number when in manual stepping mode
+     */
     private long stepNumber;
 
     // camera
@@ -53,7 +65,6 @@ public  class Frame extends JFrame {
         //setLayout(new BorderLayout());
         //setLayout(new FlowLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
 
         // setup the JFrpanelame
@@ -81,9 +92,8 @@ public  class Frame extends JFrame {
         canvas.setBackground(Color.black);
 
 
-
         this.panel = new GamePanel(canvas, this);
-        panel.keyHandler  = new KeyHandler();
+        panel.keyHandler = new KeyHandler();
         canvas.addKeyListener(panel.keyHandler);
 
         this.add(this.canvas);
@@ -99,23 +109,51 @@ public  class Frame extends JFrame {
         this.pack();
 
 
-
-
     }
 
     private void start() {
         this.last = System.nanoTime();
         this.canvas.setIgnoreRepaint(true);
         this.canvas.createBufferStrategy(2);
+        this.canvas.createBufferStrategy(2);
         Thread thread = new Thread() {
+
+
             public void run() {
+                final int NANOSECONDS_PER_SEC = 1000000000;
+                final double TARGET_FPS = 60;
+                final double DRAW_INTERVAL = NANOSECONDS_PER_SEC / TARGET_FPS;
+
+                long lastTime = System.nanoTime();
+                long currentTime;
+                int drawCount = 0;
+
+                double nextDrawTime = System.nanoTime() + DRAW_INTERVAL;
                 while (true) {
+                    currentTime = System.nanoTime();
+
+                    double remainingTime = (nextDrawTime - System.nanoTime()) / 1000000;
                     gameLoop();
+                    ;
+
+                    if (remainingTime < 0) remainingTime = 0;
                     try {
-                        Thread.sleep(5);
-                    } catch (InterruptedException e) {}
+                        Thread.sleep((long) remainingTime);
+                        nextDrawTime += DRAW_INTERVAL;
+                    } catch (Exception e) {
+                    }
+
                 }
             }
+//            public void run() {
+//                while (true) {
+//                    gameLoop();
+//                    try {
+//                        Thread.sleep(5);
+//                    } catch (InterruptedException e) {
+//                    }
+//                }
+//            }
         };
         thread.setDaemon(true);
         // start the game loop
@@ -123,7 +161,7 @@ public  class Frame extends JFrame {
     }
 
 
-    private void  updateLoop(Graphics2D g){
+    private void updateLoop(Graphics2D g) {
 
         gameIntelligence.processInput();
         gameIntelligence.update();
@@ -134,9 +172,9 @@ public  class Frame extends JFrame {
 
     private void gameLoop() {
         // get the graphics object to render to
+        Graphics2D g = null;
 
-
-        Graphics2D g = (Graphics2D)this.canvas.getBufferStrategy().getDrawGraphics();
+        g = (Graphics2D) this.canvas.getBufferStrategy().getDrawGraphics();
 
 
         this.clear(g);
@@ -148,15 +186,16 @@ public  class Frame extends JFrame {
         // set the last time
         this.last = time;
         // convert from nanoseconds to seconds
-        double elapsedTime = (double)diff / NANO_TO_BASE;
+        double elapsedTime = (double) diff / NANO_TO_BASE;
 
-updateLoop(g);
+        updateLoop(g);
 
         // dispose of the graphics object
         g.dispose();
 
         // blit/flip the buffer
         BufferStrategy strategy = this.canvas.getBufferStrategy();
+
         if (!strategy.contentsLost()) {
             strategy.show();
         }
@@ -167,15 +206,12 @@ updateLoop(g);
     }
 
 
-
     protected void clear(Graphics2D g) {
         final int w = this.canvas.getWidth();
         final int h = this.canvas.getHeight();
         g.setColor(Color.BLACK);
         g.fillRect(-w / 2, -h / 2, w, h);
     }
-
-
 
 
     public void run() {

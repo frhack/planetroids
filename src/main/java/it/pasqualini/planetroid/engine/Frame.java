@@ -92,6 +92,8 @@ public  class Frame extends JFrame {
         setLocationRelativeTo(null);
         setUndecorated(false);
         // size everything
+        this.requestFocus();
+        canvas.setFocusable(true);
         this.canvas.requestFocus();
 
         this.pack();
@@ -136,11 +138,7 @@ public  class Frame extends JFrame {
 
         Graphics2D g = (Graphics2D)this.canvas.getBufferStrategy().getDrawGraphics();
 
-        // by default, set (0, 0) to be the center of the screen with the positive x axis
-        // pointing right and the positive y axis pointing up
-        //this.transform(g);
 
-        // reset the view
         this.clear(g);
 
         // get the current time
@@ -168,31 +166,11 @@ updateLoop(g);
         Toolkit.getDefaultToolkit().sync();
     }
 
-    /**
-     * Performs any transformations to the graphics.
-     * <p>
-     * By default, this method puts the origin (0,0) in the center of the window
-     * and points the positive y-axis pointing up.
-     * @param g the graphics object to render to
-     */
-    protected void transform(Graphics2D g) {
-        final int w = this.canvas.getWidth();
-        final int h = this.canvas.getHeight();
-
-        // before we render everything im going to flip the y axis and move the
-        // origin to the center (instead of it being in the top left corner)
-        AffineTransform yFlip = AffineTransform.getScaleInstance(1, -1);
-        AffineTransform move = AffineTransform.getTranslateInstance(w / 2, -h / 2);
-        g.transform(yFlip);
-        g.transform(move);
-    }
 
 
     protected void clear(Graphics2D g) {
         final int w = this.canvas.getWidth();
         final int h = this.canvas.getHeight();
-
-        // lets draw over everything with a white background
         g.setColor(Color.BLACK);
         g.fillRect(-w / 2, -h / 2, w, h);
     }

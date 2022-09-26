@@ -1,50 +1,74 @@
 package it.pasqualini.planetroid.engine;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel{
+public class GamePanel  {
 
-	
+
     public GameGraphic gameGraphics;
     public KeyHandler keyHandler = new KeyHandler();
     public JFrame frame = null;
+    boolean start = false;
 
-    public GamePanel(JFrame frame) {
+    Canvas canvas;
+    public  int getWidth(){
+        return canvas.getWidth();
+    }
+    public  int getHeight(){
+        return canvas.getHeight();
+    }
+
+    public GamePanel(Canvas canvas, JFrame frame) {
+        this.canvas = canvas;
         int width = (int) (frame.getToolkit().getScreenSize().width * 0.8);
         int height = (int) (frame.getToolkit().getScreenSize().height * 0.8);
-        setPreferredSize(new Dimension(width, height));
-        setDoubleBuffered(true);
-        setOpaque(true);
-        setFocusable(true);
-        addKeyListener(keyHandler);
-        setBackground(Color.black);
+
+        Dimension size = new Dimension(width, height);
+        //setPreferredSize(size);
+        //setMinimumSize(size);
+        //setMaximumSize(size);
+
+        //setIgnoreRepaint(true);
+        // enable double buffering (the JFrame has to be
+        // visible before this can be done)
+canvas.setBackground(Color.black);
+
+        //setDoubleBuffered(true);
+        //setOpaque(true);
+        //setFocusable(true);
+        //addKeyListener(keyHandler);
+        //setBackground(Color.black);
         this.frame = frame;
         //thread = new Thread(this);
         //moons.add(new Moon(this));
     }
 
 
-    @Override
-    public void paintComponent(Graphics graphics) {
-        super.paintComponent(graphics);
-        Graphics2D graphics2D = (Graphics2D) graphics;
+//    @Override
+//
+//    public void paint(Graphics graphics) {
+//        //super.paintComponent(graphics);
+//        if (!start) {
+//            setIgnoreRepaint(true);
+//
+//            createBufferStrategy(2);
+//            start = true;
+//        }
+//        Graphics2D graphics2D = (Graphics2D) getBufferStrategy().getDrawGraphics();
+//        ;
+//
+//        if (gameGraphics != null)
+//            gameGraphics.draw(graphics2D);
+//        //this.clear(graphics);
+//        //moons.get(0).draw(graphics2D);
+//        //player.draw(graphics2D);
+//
+//        graphics2D.dispose();
+//    }
 
-        if (gameGraphics != null)
-            gameGraphics.draw(graphics2D);
-        //this.clear(graphics);
-        //moons.get(0).draw(graphics2D);
-        //player.draw(graphics2D);
-
-        graphics2D.dispose();
-    }
-
-    
 
     public void enterFullScreen() {
         frame.dispose();

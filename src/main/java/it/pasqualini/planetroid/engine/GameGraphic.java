@@ -14,6 +14,8 @@ import it.pasqualini.planetroid.entity.Asteroid;
 import it.pasqualini.planetroid.entity.Laser;
 import it.pasqualini.planetroid.entity.Particle;
 
+import static it.pasqualini.util.Util.println;
+
 public class GameGraphic {
 
 
@@ -24,6 +26,7 @@ public class GameGraphic {
 
 
 
+
     public GameGraphic(GamePanel panel, GameScene gameScene) {
 
         this.gamePanel = panel;
@@ -31,8 +34,17 @@ public class GameGraphic {
         gamePanel.gameGraphics = this;
     }
 
-    public void update() {
-        gamePanel.repaint();
+
+
+
+    public void update(Graphics2D graphics2D) {
+        //gamePanel.repaint();
+
+try{
+    //Graphics2D graphics2D = (Graphics2D) gamePanel.getBufferStrategy().getDrawGraphics();
+    this.draw(graphics2D);
+
+}catch (Exception e){}
     }
 
     // sposta l'origine al centro del panel
@@ -46,7 +58,18 @@ public class GameGraphic {
         g.transform(move);
     }
 
+
+    protected void clear(Graphics2D g) {
+        final int w = gamePanel.canvas.getWidth();
+        final int h = gamePanel.canvas.getHeight();
+
+        // lets draw over everything with a white background
+        g.setColor(Color.BLACK);
+        g.fillRect(-w / 2, -h / 2,2* w,2* h);
+    }
     public void draw(Graphics2D graphics2D) {
+clear(graphics2D);
+
         drawInfo(graphics2D);
         List<Laser> lasers = gameScene.getLasers();
         List<Particle> particles = gameScene.getParticles();

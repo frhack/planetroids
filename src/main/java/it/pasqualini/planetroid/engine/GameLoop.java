@@ -1,5 +1,7 @@
 package it.pasqualini.planetroid.engine;
 
+import java.awt.*;
+
 public class GameLoop implements Runnable {
 
     public GamePanel panel;
@@ -49,11 +51,14 @@ public class GameLoop implements Runnable {
         gameIntelligence.processInput();
         gameIntelligence.update();
         gamePhysic.update();
-        gameGraphycs.update();
+        //gameGraphycs.update(g);
         gameMusic.update();
     }
 
     public void start() {
+      panel.canvas.setIgnoreRepaint(true);
+
+      panel.canvas.createBufferStrategy(2);
         Thread t = new Thread(this);
         t.start();
     }

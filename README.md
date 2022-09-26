@@ -250,7 +250,7 @@ La classe Normal e' una semplice classe per la generazione di valori casuali sec
 Vector2 (vettore bidimensionale) e' una classe general purpose per gestire coppie di valori di tipo Double, utile sia per rappresentare la velocita' che la posizione.
 La classe Util contiene dei puri metodi statici di utilita': wait (per creare un attesa), println (accorciatoia per scrivere nella console) e asInt (per convertire da Double a *int* approssimando).
 
-##### Refactory
+##### Refactoring
 Si e' volutamente tenuto un design semplice, lasciando ampi spazi per l'aggiunta di funzionalita' e integrazioni, che dovrebbero essere possibili senza ristrutturare 
 il codice, eventualmente intervendo al momento necessario con un minimo refactoring.
 

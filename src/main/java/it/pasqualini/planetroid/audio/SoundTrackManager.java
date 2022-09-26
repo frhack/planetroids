@@ -1,6 +1,6 @@
 package it.pasqualini.planetroid.audio;
 
-import java.io.Serial;
+
 import java.util.EventObject;
 
 public class SoundTrackManager {
@@ -12,8 +12,7 @@ public class SoundTrackManager {
         }
 
 
-        @Serial
-        private static final long serialVersionUID = -1274246333383880410L;
+
 
 
         private final SoundTrackClip.SoundTrack.Type type;

@@ -74,7 +74,7 @@ public class Moon extends Entity {
     }
 
 
-    @Override
+
     protected void clear(Graphics2D g) {
         final int w = this.panel.getWidth();
         final int h = this.panel.getHeight();

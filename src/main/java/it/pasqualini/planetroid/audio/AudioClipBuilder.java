@@ -3,6 +3,7 @@ package it.pasqualini.planetroid.audio;
 import static it.pasqualini.util.Util.println;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -22,7 +23,6 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import com.sun.tools.javac.Main;
 
 
 public class AudioClipBuilder {
@@ -97,14 +97,14 @@ public class AudioClipBuilder {
     }
 
     private InputStream getInputStreamFromResources(String file)  {
-        return Main.class.getClassLoader().getResourceAsStream(file);
+        return this.getClass().getClassLoader().getResourceAsStream(file);
         //return new File(getClass().getResource("sounds/giorgio.wav").toURI());
         //return new File(getClass().getResource(file).toURI());
     }
 
     private static byte[] readContentIntoByteArray(InputStream fileInputStream, int frameSize) throws IOException {
 
-        byte[] bFileT = fileInputStream.readAllBytes();
+        byte[] bFileT = readAllBytes(fileInputStream);
 
         byte[] bFile = java.util.Arrays.copyOf(bFileT ,bFileT.length + bFileT.length % frameSize);
         //byte[] bFile = java.util.Arrays.copyOf(bFileT ,bFileT.length + 0);
@@ -119,6 +119,27 @@ public class AudioClipBuilder {
         return bFile;
     }
 
+    
+    public static byte[] readAllBytes(InputStream inputStream) throws IOException {
+        final int bufLen = 4 * 0x400; // 4KB
+        byte[] buf = new byte[bufLen];
+        int readLen;
+        IOException exception = null;
+
+        try {
+            try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+                while ((readLen = inputStream.read(buf, 0, bufLen)) != -1)
+                    outputStream.write(buf, 0, readLen);
+
+                return outputStream.toByteArray();
+            }
+        } catch (IOException e) {
+            exception = e;
+            throw e;
+        } finally {
+
+        }
+    }
 
     // Get all paths from a folder that inside the JAR file
     private List<Path> getPathsFromResourceJAR(String folder)

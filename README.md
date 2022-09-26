@@ -263,10 +263,10 @@ L'attuale GameIntelligenze diventerebbe una classe che implementa l'interfaccia 
 interface GameIntelligenceInterface implements GameIntelligenceInterface {
     ...
 }
-class GameIntelligencePlanetroids implements GameIntelligenceInterfac {
+class GameIntelligencePlanetroids implements GameIntelligenceInterface {
     ...
 }
-class GameIntelligenceUfos implements GameIntelligenceInterfac {
+class GameIntelligenceUfos implements GameIntelligenceInterface {
     ...
 }
 

@@ -101,6 +101,7 @@ public class GameIntelligence {
 
 
     private void start() {
+        gameScene.setLevel(gameScene.getLevel());
         gameScene.setGaming(true);
         Player player = getPlayer();
         player.setInvincibleRemainingTime(INVINCIBLE_TIME * 60);
@@ -128,6 +129,7 @@ public class GameIntelligence {
 
     public void initScene() {
         Player newPlayer = new Player(gamePanel, new KeyHandler());
+        gameScene.setLevel(0);
         gameScene.setPlayer(newPlayer); //FIXME
         gameScene.setLives(LIVES);
         gameScene.setGaming(false);

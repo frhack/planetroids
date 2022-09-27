@@ -90,6 +90,7 @@ public class GameScene {
         this.musicVolume = musicVolume;
     }
 
+    public boolean changingFullScreen;
     public double getSpeedX() {
         return speedX;
     }

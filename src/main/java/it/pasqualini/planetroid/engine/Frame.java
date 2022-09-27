@@ -14,42 +14,10 @@ import java.awt.image.BufferStrategy;
 import java.util.Iterator;
 
 public class Frame extends JFrame {
-    /**
-     * The serial version id
-     */
-    private static final long serialVersionUID = 7659608187025022915L;
 
-    /**
-     * The conversion factor from nano to base
-     */
-    public static final double NANO_TO_BASE = 1.0e9;
-
-    /**
-     * The canvas to draw to
-     */
     protected final Canvas canvas;
 
-    /** The dynamics engine */
 
-
-    // stop/pause
-
-    /**
-     * True if the simulation is exited
-     */
-    private boolean stopped;
-
-    /**
-     * The time stamp for the last iteration
-     */
-    private long last;
-
-    /**
-     * Tracking for the step number when in manual stepping mode
-     */
-    private long stepNumber;
-
-    // camera
 
 
     public GamePanel panel;
@@ -112,7 +80,7 @@ public class Frame extends JFrame {
     }
 
     private void start() {
-        this.last = System.nanoTime();
+
         this.canvas.setIgnoreRepaint(true);
         this.canvas.createBufferStrategy(2);
         this.canvas.createBufferStrategy(2);
@@ -162,7 +130,6 @@ public class Frame extends JFrame {
 
 
     private void updateLoop(Graphics2D g) {
-
         gameIntelligence.processInput();
         gameIntelligence.update();
         gamePhysic.update();
@@ -179,14 +146,7 @@ public class Frame extends JFrame {
 
         this.clear(g);
 
-        // get the current time
-        long time = System.nanoTime();
-        // get the elapsed time from the last iteration
-        long diff = time - this.last;
-        // set the last time
-        this.last = time;
-        // convert from nanoseconds to seconds
-        double elapsedTime = (double) diff / NANO_TO_BASE;
+
 
         updateLoop(g);
 
@@ -197,7 +157,9 @@ public class Frame extends JFrame {
         BufferStrategy strategy = this.canvas.getBufferStrategy();
 
         if (!strategy.contentsLost()) {
-            strategy.show();
+            try{
+                strategy.show();
+            }catch(Exception e){}
         }
 
         // Sync the display on some systems.

@@ -39,10 +39,11 @@ public class GameIntelligence {
     private final int INVINCIBLE_TIME = 3; // seconds
 
 
+
     GameScene gameScene;
 
 
-    boolean fullScreen = false;
+
     GamePanel gamePanel;
     private KeyHandler keyHandler;
 
@@ -70,13 +71,7 @@ public class GameIntelligence {
 
     private void handleKeyEvent(KeyEvent item) {
         if (item.getKeyCode() == KeyEvent.VK_F11) {
-            gameScene.setFullscreen(!gameScene.isFullscreen());
-            if (gameScene.isFullscreen()) {
-                gamePanel.enterFullScreen();
-
-            } else {
-                gamePanel.exitFullScreen();
-            }
+            gameScene.changingFullScreen = true;
         } else if (item.getKeyCode() == KeyEvent.VK_B || item.getKeyCode() == KeyEvent.VK_ESCAPE) {
             System.exit(0);
         } else if (item.getKeyCode() == KeyEvent.VK_ENTER  && ! gameScene.isGaming()) {

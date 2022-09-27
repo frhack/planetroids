@@ -38,6 +38,18 @@ public class GameGraphic {
 
 
     public void update(Graphics2D graphics2D) {
+        if(gameScene.changingFullScreen){
+            gameScene.setFullscreen(!gameScene.isFullscreen());
+            if (gameScene.isFullscreen()) {
+                gamePanel.enterFullScreen();
+
+            } else {
+                gamePanel.exitFullScreen();
+            }
+            gameScene.changingFullScreen = false;
+        }
+
+
         //gamePanel.repaint();
 
 try{
